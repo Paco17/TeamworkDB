@@ -10,7 +10,7 @@ function App() {
   return(
     <Router>
       <Navbar/>
-        <div>
+        <div className = "container p-4">
           <Routes> 
             <Route exact path="/" element={<Users/>}/>
             <Route exact path="/about" element={<About/>}/>
