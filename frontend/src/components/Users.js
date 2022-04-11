@@ -1,14 +1,35 @@
+import res from 'express/lib/response';
 import React, {useState} from 'react'
+const BACKEND = process.env.REACT_APP_API;
 
 export const Users = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const handleSubmit = (e) => {
-        console.log(e);
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        /*Investigate fetch
+            Modulo/API adentro de React
+            Recibe la direccion de donde queremos enviarlo, que queremos enviar y a traves de que metodo
+            Para decir que es un metodo asincrono usar await/async
+            await nos va dar una respuesta
+        */
+        const req = await fetch(`${BACKEND}/users`,{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body:JSON.stringify({
+                name: name,
+                email: email,
+                password: password
+            })
+        });
         
+        const data = await res.json(); 
+        console.log(data);
+
     }
 
     return(
